@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Lemon</id>
-    <version>1.2.0.0</version>
-    <authors>otf</authors>
-    <licenseUrl>https://github.com/otf/lemon/blob/master/COPYING</licenseUrl>
-    <projectUrl>https://github.com/otf/lemon</projectUrl>
+    <id>Lemon2</id>
+    <version>1.0.0.0</version>
+    <authors>otf,bleis-tift</authors>
+    <licenseUrl>https://github.com/bleis-tift/lemon2/blob/master/COPYING</licenseUrl>
+    <projectUrl>https://github.com/bleis-tift/lemon2</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>This is a functional http library for F#.</summary>
     <description>This library supports functional programming using F# on ASP.NET.</description>
