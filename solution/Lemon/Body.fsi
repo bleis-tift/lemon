@@ -4,6 +4,7 @@ open System
 open System.IO
 open System.Web
 open System.Xml.Linq
+open Basis.Core.Collections
 
 [<AutoOpen>]
 module Body =
@@ -11,4 +12,4 @@ module Body =
 
   val readXml : Stream -> XElement
 
-  val readForms : Stream -> (string * string) list
+  val readForms : Stream -> NameValueBag

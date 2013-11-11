@@ -4,10 +4,11 @@
 open NaturalSpec
 open System
 open Lemon
+open Basis.Core.Collections
 
 let hasTwo kvp = 
   match kvp with
-  | Has "two" "ni" -> true
+  | Has "two" ["ni"] -> true
   | _ -> false
 
 let lastIsThree kvp = 
@@ -17,7 +18,8 @@ let lastIsThree kvp =
 
 [<Scenario>]
 let ``list has a element``() =
-  Given [("one","ichi"); ("two","ni"); ("three","sann")]
+  Given [("one",["ichi"]); ("two",["ni"]); ("three",["sann"])]
+    |> When NameValueBag.ofSeq
     |> When hasTwo
     |> It should equal true
     |> Verify
@@ -27,15 +29,4 @@ let ``last element is three``() =
   Given ["one"; "two"; "three"]
     |> When lastIsThree
     |> It should equal true
-    |> Verify
-
-[<Scenario>]
-let ``Convert a NameValueCollection to list`` () =
-  let col = System.Collections.Specialized.NameValueCollection ()
-  col.Add ("Id", "10")
-  col.Add ("Name", "otf")
-
-  Given col
-    |> When nameValueCollections2List
-    |> It should equal [("Id", "10"); ("Name", "otf")]
     |> Verify

@@ -7,6 +7,7 @@ open System
 open System.Web
 open System.Collections.Specialized
 open Lemon
+open Basis.Core.Collections
 
 [<Scenario>]
 let ``Match a RawUrl`` () =
@@ -98,7 +99,7 @@ let ``Match a QueryParameter`` () =
 
   Given req
     |> When (function
-              | QueryParams (Has "Id" "10") & QueryParams (Has "Name" "otf") -> true
+              | QueryParams (Has "Id" ["10"]) & QueryParams (Has "Name" ["otf"]) -> true
               | _ -> false)
     |> It should equal true
     |> Verify
@@ -115,7 +116,7 @@ let ``Does not match a QueryParameter`` () =
 
   Given req
     |> When (function
-              | QueryParams (Has "Id" "5") -> true
+              | QueryParams (Has "Id" ["5"]) -> true
               | _ -> false)
     |> It should equal false
     |> Verify
@@ -133,7 +134,7 @@ let ``Match a Headers`` () =
 
   Given req
     |> When (function
-              | Headers (Has "Content-Type" "application/json") & Headers (Has "Content-Length" "1000") -> true
+              | Headers (Has "Content-Type" ["application/json"]) & Headers (Has "Content-Length" ["1000"]) -> true
               | _ -> false)
     |> It should equal true
     |> Verify

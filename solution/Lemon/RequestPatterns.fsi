@@ -4,6 +4,7 @@ open System
 open System.IO
 open System.Web
 open System.Xml.Linq
+open Basis.Core.Collections
 
 [<AutoOpen>]
 module RequestPatterns =
@@ -20,6 +21,6 @@ module RequestPatterns =
 
   val (|DELETE|_|) : Request -> Request option
 
-  val (|QueryParams|) : Request -> (string * string) list
+  val (|QueryParams|) : Request -> NameValueBag
   
-  val (|Headers|) : Request -> (string * string) list
+  val (|Headers|) : Request -> NameValueBag

@@ -1,16 +1,11 @@
 ﻿namespace Lemon
 
+open Basis.Core.Collections
+
 [<AutoOpen>]
 module Util =
-  let nameValueCollections2List (rawHeaders: System.Collections.Specialized.NameValueCollection)  =
-    [ for key in rawHeaders.Keys -> (key , rawHeaders.[key])]
-
-  let (|Has|_|) key (kvp : (string * string) list) =
-    let kvp = dict kvp
-    if kvp.ContainsKey key then
-      kvp.[key] |> Some
-    else
-      None
+  let (|Has|_|) key (header : NameValueBag) =
+    header |> NameValueBag.tryGet key
 
   let (|Last|_|) (pathes:string list) =
    if not <| List.isEmpty pathes then

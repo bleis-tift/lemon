@@ -5,6 +5,7 @@ module RequestPatterns =
   open System.IO
   open System.Web
   open System.Xml.Linq
+  open Basis.Core.Collections
   
   let (|RawUrl|) (req:Request) = req.RawUrl
 
@@ -13,10 +14,10 @@ module RequestPatterns =
     List.ofArray pathes
 
   let (|QueryParams|) (req:Request) =
-    req.QueryString |> nameValueCollections2List
+    NameValueBag(req.QueryString)
   
   let (|Headers|) (req:Request) =
-    req.Headers |> nameValueCollections2List
+    NameValueBag(req.Headers)
 
   let (|GET|_|) (req:Request) =
     if req.HttpMethod = "GET" then

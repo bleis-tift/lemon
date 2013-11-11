@@ -8,6 +8,7 @@ open System.Web
 open System.Xml.Linq
 open System.Collections.Specialized
 open Lemon
+open Basis.Core.Collections
 
 [<Scenario>]
 let ``Read a text`` () =
@@ -48,5 +49,5 @@ let ``Read a Forms`` () =
 
   Given stream
     |> When readForms
-    |> It should equal [("Id","10"); ("Name","otf")]
+    |> It should equal (NameValueBag.ofSeq [("Id",["10"]); ("Name",["otf"])])
     |> Verify
