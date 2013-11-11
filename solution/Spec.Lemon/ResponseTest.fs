@@ -8,6 +8,7 @@ open System.IO
 open System.Web
 open System.Collections.Specialized
 open Lemon
+open Basis.Core.Collections
 
 [<Example(200)>]
 [<Example(201)>]
@@ -39,6 +40,19 @@ let ``Set header`` (kvp) =
     |> It have (fun _ -> col.[fst kvp] = (snd kvp))
     |> Verify
 
+[<Scenario>]
+let ``Set headers`` () =
+  let headers = NameValueBag(["Content-Encoding", ["gzip"; "compress"]; "Accept-Language", ["jp"; "en"]])
+  let res = MockRepository.GenerateMock<Response> ()
+  let col = NameValueCollection ()
+
+  RhinoMocksExtensions.Expect<Response, NameValueCollection>(res, fun x -> x.Headers).Return(col)
+    |> ignore
+
+  Given res
+    |> When (setHeaders headers)
+    |> It have (fun _ -> headers |> NameValueBag.exists (fun (key, values) -> col.[key] = (NameValueBag.getAsSingleString key headers)))
+    |> Verify
 
 //[<Example("")>]
 //[<Example("<person>otf</person>")>]
